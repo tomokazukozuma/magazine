@@ -2,9 +2,10 @@
   <v-app>
     <v-toolbar app>
         <v-toolbar-title class="headline">
-            <span>Programming Magazine | Vue.js</span>
+            <span>Programming Magazine</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
+        <span><router-link to="/login">Login</router-link></span>
     </v-toolbar>
     <v-container justify-center>
         <v-layout text-xs-center>

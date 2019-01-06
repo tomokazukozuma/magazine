@@ -23,7 +23,7 @@ export default {
   mounted() {
     // FirebaseUI config.
     var uiConfig = {
-      signInSuccessUrl: '/category',
+      signInSuccessUrl: '/magazine/vue',
       signInOptions: [
         // Leave the lines as is for the providers you want to offer your users.
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
