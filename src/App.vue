@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container justify-center grid-list-xs>
+    <v-container justify-center>
       <v-layout text-xs-center>
         <p>
           <router-link to="/"></router-link>
@@ -11,5 +11,3 @@
   </v-app>
 </template>
 
-<script>
-</script>

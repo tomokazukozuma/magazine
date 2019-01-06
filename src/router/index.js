@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import Login from '../pages/login'
 import Top from '../components/Top'
 import HellowWorld from '../components/HelloWorld'
 import Category from '../components/Category'
@@ -10,6 +11,10 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/login',
+      component: Login
+    },
     {
       path: '/',
       component: Top
