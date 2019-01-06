@@ -1,7 +1,9 @@
 <template>
-    <v-container justify-center>
-      <div id="firebaseui-auth-container"></div>
-    </v-container>
+  <v-content>
+        <v-container justify-center>
+            <div id="firebaseui-auth-container"></div>
+        </v-container>
+    </v-content>
 </template>
 
 <script>

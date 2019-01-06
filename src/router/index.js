@@ -2,9 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Login from '../pages/login'
-import Top from '../components/Top'
-import HellowWorld from '../components/HelloWorld'
-import Category from '../components/Category'
+import Top from '../pages/top'
+import Articles from '../pages/magazine/articles'
 
 Vue.use(Router)
 
@@ -20,12 +19,8 @@ export default new Router({
       component: Top
     },
     {
-      path: '/vue',
-      component: HellowWorld
-    },
-    {
-      path: '/category',
-      component: Category
+      path: '/magazine/vue',
+      component: Articles
     }
   ]
 })
