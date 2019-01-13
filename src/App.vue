@@ -8,16 +8,10 @@
         <Login />
     </v-toolbar>
     <v-container justify-center>
-        <v-layout text-xs-center>
-            <p>
-                <router-link to="/"></router-link>
-            </p>
-            <p>
-                <router-link to="/login">Login</router-link>
-            </p>
-            <p>
-                <router-link to="/magazine/vue">Vue Magazine</router-link>
-            </p>
+        <v-layout text-md-center>
+            <router-link to="/"></router-link>
+            <router-link to="/login"></router-link>
+            <router-link to="/magazine/vue"></router-link>
             <router-view></router-view>
         </v-layout>
     </v-container>
