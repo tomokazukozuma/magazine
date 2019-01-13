@@ -16,7 +16,6 @@ export default {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
     },
     logout() {
-        console.log('=== logout() ===')
         firebase.auth().signOut()
     },
     onAuth() {
