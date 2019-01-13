@@ -5,16 +5,7 @@
             <span>Programming Magazine</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <div v-if="isSignIn" key="login" class="navbar-item">
-            <p class="navbar-item">{{ user.displayName }}</p>
-            <button type="button" class="button is-small is-info is-outlined" @click="doLogout">
-            Sign out
-            </button>
-        </div>
-        <!-- 未ログイン時にはログインボタンを表示 -->
-        <div v-else key="logout">
-            <span><router-link to="/login">Login</router-link></span>
-        </div>
+        <Login />
     </v-toolbar>
     <v-container justify-center>
         <v-layout text-xs-center>
@@ -34,21 +25,10 @@
 </template>
 
 <script>
-import firebase from './firebase'
+import login from './components/header/login'
 export default {
-    computed: {
-        user() {
-            return this.$store.getters.user;
-        },
-        isSignIn() {
-            return this.$store.getters.isSignIn
-        }
-    },
-    methods: {
-        // ログアウト処理
-        doLogout() {
-            firebase.logout();
-        }
+    components: {
+        Login: login
     }
 }
 </script>
