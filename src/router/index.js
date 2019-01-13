@@ -8,19 +8,19 @@ import Articles from '../pages/magazine/articles'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  routes: [
-    {
-      path: '/login',
-      component: Login
-    },
-    {
-      path: '/',
-      component: Top
-    },
-    {
-      path: '/magazine/vue',
-      component: Articles
-    }
-  ]
+    mode: 'history',
+    routes: [
+        {
+            path: '/login',
+            component: Login
+        },
+        {
+            path: '/',
+            component: Top
+        },
+        {
+            path: '/magazine/vue',
+            component: Articles
+        }
+    ]
 })

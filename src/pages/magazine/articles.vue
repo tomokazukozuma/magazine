@@ -2,22 +2,22 @@
     <v-content>
         <v-container justify-center grid-list-md>
             <v-layout row wrap>
-            <v-flex  xs12 sm6 md4 v-for="(article, i) in articles" :key="i">
-            <v-card :href="article.link" target="_blank">
-                <v-img
-                :src="article.sumbnail"
-                aspect-ratio="1.75"
-                ></v-img>
+                <v-flex xs12 sm6 md4 v-for="(article, i) in articles" :key="i">
+                    <v-card :href="article.link" target="_blank">
+                        <v-img
+                        :src="article.sumbnail"
+                        aspect-ratio="1.75"
+                        ></v-img>
 
-                <v-card-title primary-title>
-                <div>
-                    <h3 class="headline mb-0">{{ article.title }} ...</h3>
-                    <div>{{article.content}} ...</div>
-                    <div>{{article.date}}</div>
-                </div>
-                </v-card-title>
-            </v-card>
-            </v-flex>
+                        <v-card-title primary-title>
+                        <div>
+                            <h3 class="headline mb-0">{{ article.title }} ...</h3>
+                            <div>{{article.content}} ...</div>
+                            <div>{{article.date}}</div>
+                        </div>
+                        </v-card-title>
+                    </v-card>
+                </v-flex>
             </v-layout>
         </v-container>
     </v-content>
