@@ -11,6 +11,7 @@
         <v-layout text-md-center>
             <router-link to="/"></router-link>
             <router-link to="/login"></router-link>
+            <router-link to="/magazine/add"></router-link>
             <router-link to="/magazine/vue"></router-link>
             <router-view></router-view>
         </v-layout>
