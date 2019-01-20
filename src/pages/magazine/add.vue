@@ -27,6 +27,7 @@
     </v-content>
 </template>
 <script>
+    import firebase from 'firebase'
     import Vue from 'vue'
     import VeeValidate from 'vee-validate'
 
@@ -65,6 +66,10 @@
         methods: {
         submit () {
             this.$validator.validateAll()
+            const func = firebase.functions().httpsCallable('addMagazine');
+            func({name: this.name, explain: this.explain}).then(function(result) {
+                console.log("success")
+            });
         },
         clear () {
             this.name = ''
