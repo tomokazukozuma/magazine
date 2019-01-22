@@ -24,5 +24,8 @@ export default {
             store.commit('setUser', user);
             store.commit('setSignIn', user.uid ? true : false);
         });
+    },
+    db() {
+        return firebase.firestore()
     }
 };

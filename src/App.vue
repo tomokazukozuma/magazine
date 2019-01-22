@@ -13,6 +13,7 @@
             <router-link to="/login"></router-link>
             <router-link to="/magazine/add"></router-link>
             <router-link to="/magazine/vue"></router-link>
+            <router-link to="/user/:uid/magazine"></router-link>
             <router-view></router-view>
         </v-layout>
     </v-container>

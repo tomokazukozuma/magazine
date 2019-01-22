@@ -39,43 +39,41 @@
         },
 
         data: () => ({
-        name: '',
-        explain: '',
-        dictionary: {
-            attributes: {
-                explain: 'E-mail Address'
-                // custom attributes
-            },
-            custom: {
-                name: {
-                    required: () => 'マガジン名を入力してください',
-                    max: 'マガジン名は20文字以内です'
+            name: '',
+            explain: '',
+            dictionary: {
+                attributes: {
+                    explain: 'E-mail Address'
+                    // custom attributes
                 },
-                explain: {
-                    required: () => 'マガジンの説明が空です',
-                    max: '説明文は100文字以内です'
+                custom: {
+                    name: {
+                        required: () => 'マガジン名を入力してください',
+                        max: 'マガジン名は20文字以内です'
+                    },
+                    explain: {
+                        required: () => 'マガジンの説明が空です',
+                        max: '説明文は100文字以内です'
+                    }
                 }
             }
-        }
         }),
 
         mounted () {
-        this.$validator.localize('en', this.dictionary)
+            this.$validator.localize('en', this.dictionary)
         },
-
         methods: {
-        submit () {
-            this.$validator.validateAll()
-            const func = firebase.functions().httpsCallable('addMagazine');
-            func({name: this.name, explain: this.explain}).then(function(result) {
-                console.log("success")
-            });
-        },
-        clear () {
-            this.name = ''
-            this.explain = ''
-            this.$validator.reset()
-        }
+            submit () {
+                this.$validator.validateAll()
+                const func = firebase.functions().httpsCallable('addMagazine');
+                func({name: this.name, explain: this.explain}).then(() => {
+                });
+            },
+            clear () {
+                this.name = ''
+                this.explain = ''
+                this.$validator.reset()
+            }
         }
     }
 </script>
