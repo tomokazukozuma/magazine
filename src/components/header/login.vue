@@ -1,6 +1,6 @@
 <template>
     <div v-if="isSignIn" key="login" class="navbar-item">
-        <p class="navbar-item">{{ user.displayName }}</p>
+        <router-link v-bind:to="{ name : 'UserMagazine', params : { uid: user.uid }}"><p class="navbar-item">{{ user.displayName }}</p></router-link>
         <button type="button" class="button is-small is-info is-outlined" @click="doLogout">
         Sign out
         </button>

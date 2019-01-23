@@ -26,6 +26,6 @@ export default {
         });
     },
     db() {
-        return firebase.firestore()
+        return firebase.firestore();
     }
 };

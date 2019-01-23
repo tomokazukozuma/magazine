@@ -35,13 +35,7 @@
             db.collection("magazines").where("uid", "==", this.$route.params.uid)
             .get()
             .then((querySnapshot) => {
-                console.log(querySnapshot.docs)
-                querySnapshot.forEach(function(doc) {
-                    // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.id, " => ", doc.data());
-                });
                 this.magazines = querySnapshot.docs.map(elem => elem.data());
-                console.log(this.magazines)
             })
 ;        },
     }
