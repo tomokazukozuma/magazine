@@ -32,6 +32,11 @@ export default new Router({
             name: 'UserMagazine',
             path: '/user/:uid/magazine',
             component: UserMagazine
+        },
+        {
+            name: 'MagazineArticles',
+            path: '/magazine/:articleId',
+            component: Articles
         }
     ]
 })

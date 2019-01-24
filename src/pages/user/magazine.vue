@@ -1,21 +1,23 @@
 <template>
     <v-content>
-        <v-container justify-center>
+        <v-container justify-center grid-list-md>
             <v-layout row wrap>
                 <v-flex xs12 sm6 md4 v-for="(magazine, i) in magazines" :key="i">
-                    <v-card :href="magazine.link" target="_blank">
-                        <v-img
-                        :src="magazine.sumbnail"
-                        aspect-ratio="1.75"
-                        ></v-img>
+                    <router-link v-bind:to="{ name : 'MagazineArticles', params : { magazineId: magazine.id }}">
+                        <v-card :href="magazine.link" target="_blank">
+                            <v-img
+                            :src="magazine.sumbnail"
+                            aspect-ratio="1.75"
+                            ></v-img>
 
-                        <v-card-title primary-title>
-                        <div>
-                            <h3 class="headline mb-0">{{ magazine.name }} ...</h3>
-                            <div>{{magazine.explain}} ...</div>
-                        </div>
-                        </v-card-title>
-                    </v-card>
+                            <v-card-title primary-title>
+                            <div>
+                                <h3 class="headline mb-0">{{ magazine.name }} ...</h3>
+                                <div>{{magazine.explain}} ...</div>
+                            </div>
+                            </v-card-title>
+                        </v-card>
+                    </router-link>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -35,8 +37,18 @@
             db.collection("magazines").where("uid", "==", this.$route.params.uid)
             .get()
             .then((querySnapshot) => {
-                this.magazines = querySnapshot.docs.map(elem => elem.data());
+                querySnapshot.forEach((doc) => {
+                    let data = {
+                        'id': doc.id,
+                        'uid': doc.data().uid,
+                        'name': doc.data().name,
+                        'explain': doc.data().explain,
+                        'create_on': doc.data().create_on,
+                        'slug': doc.data().slug
+                    }
+                    this.magazines.push(data)
+                })
             })
-;        },
+;       },
     }
 </script>
