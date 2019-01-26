@@ -4,7 +4,7 @@
             <v-layout row wrap>
                 <v-flex xs12 sm6 md4 v-for="(magazine, i) in magazines" :key="i">
                     <router-link v-bind:to="{ name : 'MagazineArticles', params : { magazineId: magazine.id }}">
-                        <v-card :href="magazine.link" target="_blank">
+                        <v-card>
                             <v-img
                             :src="magazine.sumbnail"
                             aspect-ratio="1.75"
@@ -27,7 +27,6 @@
 <script>
     import firebase from '../../firebase'
     
-
     export default {
         data () {
             return { magazines: [] }
@@ -47,8 +46,8 @@
                         'slug': doc.data().slug
                     }
                     this.magazines.push(data)
-                })
-            })
-;       },
+                });
+            });
+        }
     }
 </script>
