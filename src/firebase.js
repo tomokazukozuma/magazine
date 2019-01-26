@@ -26,6 +26,9 @@ export default {
         });
     },
     db() {
+        firebase.firestore().settings({
+            timestampsInSnapshots: true
+        });
         return firebase.firestore();
     }
 };
