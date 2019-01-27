@@ -35,7 +35,7 @@ export default new Router({
         },
         {
             name: 'MagazineArticles',
-            path: '/magazine/:articleId',
+            path: '/magazine/:magazineId',
             component: Articles
         }
     ]
