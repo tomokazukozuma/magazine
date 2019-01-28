@@ -24,7 +24,7 @@
 </template>
 
 <script>
-
+import firebase from '../../firebase'
 export default {
     data () {
         return {
@@ -80,6 +80,26 @@ export default {
                 }
             ]
         }
+    },
+    mounted() {
+        const db = firebase.db();
+        db.collection("articles").where("magazineId", "==", this.$route.params.magazineId)
+        .get()
+        .then((querySnapshot) => {
+            const articles = []
+            querySnapshot.forEach((doc) => {
+                let data = {
+                    'id': doc.id,
+                    'uid': doc.data().uid,
+                    'name': doc.data().name,
+                    'explain': doc.data().explain,
+                    'create_on': doc.data().create_on,
+                    'slug': doc.data().slug
+                }
+                articles.push(data)
+            });
+            this.articles = articles;
+        });
     }
 }
 </script>
