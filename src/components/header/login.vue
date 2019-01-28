@@ -1,7 +1,7 @@
 <template>
     <v-toolbar-items>
         <v-btn flat>
-            投稿
+            <PostArticle />
         </v-btn>
         <v-btn flat>
         <div v-if="isSignIn">
@@ -9,13 +9,13 @@
                 投稿
             </div> -->
             <v-menu offset-y>
-                <v-btn
+                <span
                     slot="activator"
                     color="primary"
                     dark
                 >
                     {{ user.displayName }}
-                </v-btn>
+                </span>
                 <v-list>
                     <v-list-tile v-for="(item, index) in items" :key="index">
                         <v-list-tile-title>
@@ -43,7 +43,11 @@
 
 <script>
 import firebase from '../../firebase'
+import postArticle from '../modal/post_article'
 export default {
+    components: {
+        PostArticle: postArticle
+    },
     data() {
         //{{ item.title }}
         return {
