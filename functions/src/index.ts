@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as uuid from 'uuid/v4';
+var parser = require("ogp-parser");
 
 admin.initializeApp(functions.config().firebase);
 admin.firestore().settings({
@@ -40,4 +41,13 @@ exports.addMagazine = functions.https.onCall(async (data, context) => {
     });
     console.log('Success'); // eslint-disable-line no-console
     return;
+});
+
+exports.crawlArticleInfo = functions.https.onCall(async (data, context) => {
+    parser(data.url, false).then(result => {
+        console.log(result);
+        return result
+    }).catch(error => {
+        console.error(error);
+    });
 });
