@@ -44,10 +44,8 @@ exports.addMagazine = functions.https.onCall(async (data, context) => {
 });
 
 exports.crawlArticleInfo = functions.https.onCall(async (data, context) => {
-    parser(data.url, false).then(result => {
-        console.log(result);
-        return result
-    }).catch(error => {
+    const result = await parser(data.url, false).catch(error => {
         console.error(error);
     });
+    return result;
 });
