@@ -51,7 +51,7 @@
 
 <script>
 import firebase from 'firebase'
-
+import * as uuid from 'uuid/v4';
 export default {
     data: () => ({
         dialog: false,
@@ -72,7 +72,7 @@ export default {
         },
         addArticle() {
             const db = firebase.firestore();
-            db.collection('articles').doc(Date.now().toString()).set({
+            db.collection('articles').doc(uuid()).set({
                 title: this.title,
                 image: this.image,
                 description:this.description,
