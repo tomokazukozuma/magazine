@@ -13,9 +13,7 @@
                         <v-text-field label="url*" required v-model="url"></v-text-field>
                         <small>*indicates required field</small>
                     </v-flex>
-                    <div v-if="image===''">
-                    </div>
-                    <div v-else>
+                    <div v-if="image!==''">
                     <v-card>
                         <v-flex xs12>
                             <v-img
@@ -38,8 +36,12 @@
             </v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-            <v-btn color="blue darken-1" flat @click="crawlArticleInfo">取得</v-btn>
+            <div v-if="image===''">
+                <v-btn color="blue darken-1" flat @click="crawlArticleInfo">取得</v-btn>
+            </div>
+            <div v-else>
+                <v-btn color="blue darken-1" flat @click="addArticle">登録</v-btn>
+            </div>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -59,8 +61,7 @@ export default {
         description: ""
     }),
     methods: {
-        crawlArticleInfo () {
-            console.log(this.url)
+        crawlArticleInfo() {
             const func = firebase.functions().httpsCallable('crawlArticleInfo');
             func({url: this.url}).then(result => {
                 console.log(result.data.title)
@@ -69,7 +70,18 @@ export default {
                 this.description = result.data.ogp["og:description"][0]
             });
         },
-        
+        addArticle() {
+            const db = firebase.firestore();
+            db.collection('articles').doc(Date.now().toString()).set({
+                title: this.title,
+                image: this.image,
+                description:this.description,
+                create_on: new Date(),
+            })
+            .catch((err) => {
+                console.log(err); // eslint-disable-line no-console
+            });
+        }
     }
 }
 </script>
