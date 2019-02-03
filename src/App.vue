@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar app>
         <v-toolbar-title class="headline">
-            <span>Programming Magazine</span>
+            <router-link v-bind:to="{ name : 'Top'}"><span>Programming Magazine</span></router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <Login />
@@ -28,3 +28,9 @@ export default {
     }
 }
 </script>
+
+<style>
+a {
+    text-decoration: none;
+}
+</style>
