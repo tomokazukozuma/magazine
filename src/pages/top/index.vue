@@ -2,9 +2,19 @@
     <v-content>
         <v-container grid-list-md text-xs-center>
             <v-layout row wrap>
-                <v-flex v-for="i in 3" :key="`4${i}`" xs4>
+                <v-flex xs4>
                     <v-card dark color="primary">
-                    <v-card-text class="px-0">4</v-card-text>
+                    <v-card-text class="px-0">New</v-card-text>
+                    </v-card>
+                </v-flex>
+                <v-flex xs4>
+                    <v-card dark color="primary">
+                    <v-card-text class="px-0">Recommend</v-card-text>
+                    </v-card>
+                </v-flex>
+                <v-flex xs4>
+                    <v-card dark color="primary">
+                    <v-card-text class="px-0">Magazine</v-card-text>
                     </v-card>
                 </v-flex>
             </v-layout>
@@ -48,7 +58,7 @@
                                         <v-card-title primary-title>
                                         <div>
                                             <h3 class="headline mb-0">{{ magazine.name }}</h3>
-                                            <div>{{magazine.explain}}</div>
+                                            <div>{{magazine.description}}</div>
                                         </div>
                                         </v-card-title>
                                     </v-card>
@@ -97,11 +107,11 @@ export default {
         .then((querySnapshot) => {
             querySnapshot.forEach(doc => {
                 let data = {
-                    'id': doc.id,
-                    'uid': doc.data().uid,
-                    'name': doc.data().name,
-                    'explain': doc.data().explain,
-                    'create_on': doc.data().create_on,
+                    id: doc.id,
+                    uid: doc.data().uid,
+                    name: doc.data().name,
+                    description: doc.data().description,
+                    create_on: doc.data().create_on,
                 }
                 this.magazines.push(data)
             });
