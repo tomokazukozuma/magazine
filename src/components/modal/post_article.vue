@@ -43,6 +43,7 @@
             </v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click="dialog = false">キャンセル</v-btn>
             <div v-if="image===''">
                 <v-btn color="blue darken-1" flat @click="crawlArticleInfo">取得</v-btn>
             </div>
