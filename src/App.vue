@@ -2,7 +2,7 @@
   <v-app>
     <v-toolbar app>
         <v-toolbar-title class="headline">
-            <router-link v-bind:to="{ name : 'Top'}"><span>Programming Magazine</span></router-link>
+            <router-link v-bind:to="{ name : 'Top'}"><span>M</span></router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <Login />
