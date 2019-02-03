@@ -4,10 +4,10 @@
             <PostArticle />
         </v-btn>
         <v-btn flat>
+            <PostMagazine />
+        </v-btn>
+        <v-btn flat>
         <div v-if="isSignIn">
-            <!-- <div class="navbar-item">
-                投稿
-            </div> -->
             <v-menu offset-y>
                 <span
                     slot="activator"
@@ -31,7 +31,6 @@
                     </v-list-tile>
                 </v-list>
             </v-menu>
-            <!-- <router-link v-bind:to="{ name : 'UserMagazine', params : { uid: user.uid }}"><p class="navbar-item">{{ user.displayName }}</p></router-link> -->
         </div>
         <!-- 未ログイン時にはログインボタンを表示 -->
         <div v-else key="logout">
@@ -44,9 +43,11 @@
 <script>
 import firebaseClient from '../../firebase_client'
 import postArticle from '../modal/post_article'
+import postMagazine from '../modal/post_magazine'
 export default {
     components: {
-        PostArticle: postArticle
+        PostArticle: postArticle,
+        PostMagazine: postMagazine
     },
     data() {
         //{{ item.title }}

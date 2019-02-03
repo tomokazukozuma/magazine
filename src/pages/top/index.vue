@@ -16,7 +16,7 @@
                     <v-container grid-list-md>
                         <v-layout row wrap>
                             <v-flex xs12 v-for="(article, i) in articles" :key="i">
-                                <v-card :href="article.link" target="_blank">
+                                <v-card :href="article.url" target="_blank">
                                     <v-img
                                     :src="article.sumbnail"
                                     aspect-ratio="2"
@@ -80,11 +80,12 @@ export default {
             const articles = []
             querySnapshot.forEach(doc => {
                 let data = {
-                    'id': doc.id,
-                    'sumbnail': doc.data().image,
-                    'content': doc.data().description,
-                    'create_on': doc.data().create_on,
-                    'title': doc.data().title
+                    id: doc.id,
+                    sumbnail: doc.data().image,
+                    content: doc.data().description,
+                    create_on: doc.data().create_on,
+                    title: doc.data().title,
+                    url: doc.data().url
                 }
                 articles.push(data)
             });

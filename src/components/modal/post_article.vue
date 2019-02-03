@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+    <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
         <span slot="activator" color="black" dark>投稿</span>
         <v-card>
@@ -11,8 +11,8 @@
                     <v-layout wrap>
                     <v-flex xs12>
                         <v-text-field label="url*" required v-model="url"></v-text-field>
-                        <small>*indicates required field</small>
                     </v-flex>
+                    <small>*必須</small>
                     <div v-if="image!==''">
                         <v-card>
                             <v-flex xs12>
@@ -54,9 +54,8 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
-  </v-layout>
+    </v-layout>
 </template>
-
 
 <script>
 import firebase from 'firebase';
@@ -78,13 +77,11 @@ export default {
         .get()
         .then((querySnapshot) => {
             querySnapshot.forEach(doc => {
-                console.log(doc.id)
                 this.magazines.push({
                     value: doc.id,
                     text: doc.data().name
                 });
             });
-            console.log(this.magazines)
         });
     },
     methods: {
@@ -99,6 +96,7 @@ export default {
         addArticle() {
             const db = firebaseClient.db();
             db.collection('articles').doc(uuid()).set({
+                url: this.url,
                 title: this.title,
                 image: this.image,
                 description:this.description,
@@ -108,8 +106,8 @@ export default {
             .then(() => {
                 this.dialog = false
             })
-            .catch((err) => {
-                console.log(err);
+            .catch(err => {
+                console.log(err)
             });
         }
     }
