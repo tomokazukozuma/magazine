@@ -3,10 +3,10 @@ import './plugins/vuetify'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import firebase from './firebase'
+import firebaseClient from './firebase_client'
 
-firebase.init()
-firebase.onAuth()
+firebaseClient.init()
+firebaseClient.onAuth()
 Vue.config.productionTip = false
 
 new Vue({

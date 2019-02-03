@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import firebase from '../../firebase'
+import firebaseClient from '../../firebase_client'
 import postArticle from '../modal/post_article'
 export default {
     components: {
@@ -72,7 +72,7 @@ export default {
     methods: {
         // ログアウト処理
         doLogout() {
-            firebase.logout();
+            firebaseClient.logout();
         }
     }
 }

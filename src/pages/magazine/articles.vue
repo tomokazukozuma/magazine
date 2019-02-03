@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import firebase from '../../firebase'
+import firebaseClient from '../../firebase_client'
 export default {
     data () {
         return {
@@ -32,7 +32,7 @@ export default {
         }
     },
     mounted() {
-        const db = firebase.db();
+        const db = firebaseClient.db();
         db.collection("articles").where("magazineId", "==", this.$route.params.magazineId)
         .get()
         .then((querySnapshot) => {

@@ -25,14 +25,14 @@
 </template>
 
 <script>
-    import firebase from '../../firebase'
+    import firebaseClient from '../../firebase_client'
     
     export default {
         data () {
             return { magazines: [] }
         },
         mounted () {
-            const db = firebase.db();
+            const db = firebaseClient.db();
             db.collection("magazines").where("uid", "==", this.$route.params.uid)
             .get()
             .then((querySnapshot) => {
@@ -43,7 +43,6 @@
                         'name': doc.data().name,
                         'explain': doc.data().explain,
                         'create_on': doc.data().create_on,
-                        'slug': doc.data().slug
                     }
                     this.magazines.push(data)
                 });
