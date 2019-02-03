@@ -33,7 +33,7 @@ exports.addMagazine = functions.https.onCall(async (data, context) => {
     await db.collection('magazines').doc(uuid()).set({
         uid: context.auth.uid,
         name: data.name,
-        explain: data.explain,
+        description: data.description,
         create_on: new Date()
     })
     .catch((err) => {
