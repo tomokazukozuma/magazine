@@ -32,7 +32,8 @@
                         </v-card>
                         <v-flex xs12>
                             <v-select
-                                :items="magazineIds"
+                                v-model="magazineId"
+                                v-bind:items="magazines"
                                 label="Magazine*"
                                 required
                             ></v-select>
@@ -68,29 +69,24 @@ export default {
         title: "",
         image: "",
         description: "",
-        magazineIds: []
+        magazineId: "",
+        magazines: []
     }),
-    // mounted: {
-    //     getMagazines() {
-    //         const db = firebaseClient.db();
-    //         db.collection("articles").where("magazineId", "==", this.$route.params.magazineId)
-    //         .get()
-    //         .then((querySnapshot) => {
-    //             console.log("111111111111")
-    //             querySnapshot.forEach(doc => {
-    //                 // const data = {
-    //                 //     'id': doc.id,
-    //                 //     'uid': doc.data().uid,
-    //                 //     'name': doc.data().name,
-    //                 //     'explain': doc.data().explain,
-    //                 //     'create_on': doc.data().create_on,
-    //                 // }
-    //                 console.log(doc.id)
-    //                 this.magazineIds.push(doc.id)
-    //             });
-    //         });
-    //     }
-    // },
+    mounted() {
+        const db = firebaseClient.db();
+        db.collection("magazines").where("uid", "==", this.$store.getters.user.uid)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach(doc => {
+                console.log(doc.id)
+                this.magazines.push({
+                    value: doc.id,
+                    text: doc.data().name
+                });
+            });
+            console.log(this.magazines)
+        });
+    },
     methods: {
         crawlArticleInfo() {
             const func = firebase.functions().httpsCallable('crawlArticleInfo');
@@ -101,15 +97,19 @@ export default {
             });
         },
         addArticle() {
-            const db = firebaseClient.firestore();
+            const db = firebaseClient.db();
             db.collection('articles').doc(uuid()).set({
                 title: this.title,
                 image: this.image,
                 description:this.description,
                 create_on: new Date(),
+                magazineId: this.magazineId
+            })
+            .then(() => {
+                this.dialog = false
             })
             .catch((err) => {
-                console.log(err); // eslint-disable-line no-console
+                console.log(err);
             });
         }
     }
