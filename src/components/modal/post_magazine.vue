@@ -48,9 +48,6 @@
                 description: ''
             }
         },
-        mounted () {
-            this.$validator.localize('en', this.dictionary)
-        },
         methods: {
             submit () {
                 const func = firebase.functions().httpsCallable('addMagazine');
@@ -62,7 +59,6 @@
             clear () {
                 this.name = ''
                 this.description = ''
-                this.$validator.reset()
             }
         }
     }

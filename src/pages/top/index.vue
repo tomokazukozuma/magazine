@@ -24,8 +24,8 @@
 
                                     <v-card-title primary-title>
                                     <div>
-                                        <h3 class="headline mb-0">{{ article.title }} ...</h3>
-                                        <div>{{article.content}} ...</div>
+                                        <h3 class="headline mb-0">{{ article.title }}</h3>
+                                        <div>{{article.content}}</div>
                                         <div>{{article.date}}</div>
                                     </div>
                                     </v-card-title>
@@ -47,8 +47,8 @@
 
                                         <v-card-title primary-title>
                                         <div>
-                                            <h3 class="headline mb-0">{{ magazine.name }} ...</h3>
-                                            <div>{{magazine.explain}} ...</div>
+                                            <h3 class="headline mb-0">{{ magazine.name }}</h3>
+                                            <div>{{magazine.explain}}</div>
                                         </div>
                                         </v-card-title>
                                     </v-card>
