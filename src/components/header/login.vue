@@ -8,13 +8,14 @@
         </v-btn>
         <v-btn flat>
         <div v-if="isSignIn">
+            
             <v-menu offset-y>
-                <span
-                    slot="activator"
-                    color="primary"
-                    dark
-                >
-                    {{ user.displayName }}
+                <span slot="activator">
+                    <v-avatar>
+                    <img
+                        :src="user.photoURL"
+                    >
+                    </v-avatar>
                 </span>
                 <v-list>
                     <v-list-tile v-for="(item, index) in items" :key="index">
@@ -64,6 +65,7 @@ export default {
     },
     computed: {
         user() {
+            console.log(this.$store.getters.user)
             return this.$store.getters.user;
         },
         isSignIn() {
