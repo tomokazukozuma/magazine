@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as uuid from 'uuid/v4';
-var parser = require("ogp-parser");
+const parser = require("ogp-parser");
 
 admin.initializeApp(functions.config().firebase);
 admin.firestore().settings({
@@ -21,6 +21,26 @@ exports.registerUsers = functions.auth.user().onCreate(async user => {
         email,
         create_on: new Date(),
     })
+    .catch((err) => {
+        console.log(err); // eslint-disable-line no-console
+    });
+    console.log('Success'); // eslint-disable-line no-console
+    return;
+});
+
+exports.createMagazine = functions.firestore.document("users/{uid}/magazines/{magazineId}").onCreate(async (snap, ctx) => {
+    const db = admin.firestore();
+    await db.collection('magazines').doc(ctx.params.magazineId).set(snap.data())
+    .catch((err) => {
+        console.log(err); // eslint-disable-line no-console
+    });
+    console.log('Success'); // eslint-disable-line no-console
+    return;
+});
+
+exports.createArticle = functions.firestore.document("magazines/{magazineId}/articles/{articleId}").onCreate(async (snap, ctx) => {
+    const db = admin.firestore();
+    await db.collection('articles').doc(ctx.params.articleId).set(snap.data())
     .catch((err) => {
         console.log(err); // eslint-disable-line no-console
     });

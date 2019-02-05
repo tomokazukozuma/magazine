@@ -30,7 +30,7 @@
             <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" flat @click="clear(); dialog = false">キャンセル</v-btn>
-            <v-btn color="blue darken-1" flat @click="submit">登録</v-btn>
+            <v-btn color="blue darken-1" flat @click="addMagazine">登録</v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -38,28 +38,46 @@
 </template>
 
 <script>
-    import firebase from 'firebase'
+import firebase from 'firebase'
+import firebaseClient from '../../firebase_client';
+import * as uuid from 'uuid/v4';
 
-    export default {
-        data() {
-            return {
-                dialog: false,
-                name: '',
-                description: ''
-            }
+export default {
+    data() {
+        return {
+            dialog: false,
+            name: '',
+            description: ''
+        }
+    },
+    methods: {
+        submit () {
+            const func = firebase.functions().httpsCallable('addMagazine');
+            func({name: this.name, description: this.description})
+            .then(() => {
+                this.dialog = false;
+            });
         },
-        methods: {
-            submit () {
-                const func = firebase.functions().httpsCallable('addMagazine');
-                func({name: this.name, description: this.description})
-                .then(() => {
-                    this.dialog = false;
-                });
-            },
-            clear () {
-                this.name = ''
-                this.description = ''
-            }
+        addMagazine() {
+            const db = firebaseClient.db();
+            db.collection(`users/${this.$store.getters.user.uid}/magazines`).doc(uuid()).set({
+                uid: this.$store.getters.user.uid,
+                name: this.name,
+                description: this.description,
+                create_on: new Date()
+            })
+            .then(() => {
+                this.dialog = false;
+                this.clear();
+            })
+            .catch(err => {
+                console.log(err)
+            });
+        },
+        clear () {
+            this.name = ''
+            this.description = ''
         }
     }
+}
 </script>

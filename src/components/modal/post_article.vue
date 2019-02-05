@@ -110,7 +110,8 @@ export default {
                 create_on: new Date()
             })
             .then(() => {
-                this.dialog = false
+                this.dialog = false;
+                this.clear();
             })
             .catch(err => {
                 console.log(err)
