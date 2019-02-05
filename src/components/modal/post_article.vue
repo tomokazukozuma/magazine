@@ -61,6 +61,13 @@
 import firebase from 'firebase';
 import firebaseClient from '../../firebase_client';
 import * as uuid from 'uuid/v4';
+import crypto from'crypto';
+
+function md5hex(str) {
+  const md5 = crypto.createHash('md5')
+  return md5.update(str, 'binary').digest('hex')
+}
+
 export default {
     data: () => ({
         dialog: false,
@@ -95,13 +102,12 @@ export default {
         },
         addArticle() {
             const db = firebaseClient.db();
-            db.collection('articles').doc(uuid()).set({
+            db.collection(`magazines/${this.magazineId}/articles`).doc(md5hex(this.url)).set({
                 url: this.url,
                 title: this.title,
                 image: this.image,
                 description:this.description,
-                create_on: new Date(),
-                magazineId: this.magazineId
+                create_on: new Date()
             })
             .then(() => {
                 this.dialog = false
