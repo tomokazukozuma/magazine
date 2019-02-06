@@ -11,8 +11,8 @@
 
                         <v-card-title primary-title>
                         <div>
-                            <h3 class="headline mb-0">{{ article.title }} ...</h3>
-                            <div>{{article.content}} ...</div>
+                            <h3 class="mb-0"><p class="description">{{ article.title }}</p></h3>
+                            <div><p class="description">{{article.content}}</p></div>
                             <div>{{article.date}}</div>
                         </div>
                         </v-card-title>
@@ -52,3 +52,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+p.description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+</style>

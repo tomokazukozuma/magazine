@@ -25,7 +25,7 @@
                 <v-flex xs8>
                     <v-container grid-list-md>
                         <v-layout row wrap>
-                            <v-flex xs12 v-for="(article, i) in articles" :key="i">
+                            <v-flex xs6 v-for="(article, i) in articles" :key="i">
                                 <v-card :href="article.url" target="_blank">
                                     <v-img
                                     :src="article.sumbnail"
@@ -34,8 +34,8 @@
 
                                     <v-card-title primary-title>
                                     <div>
-                                        <h3 class="headline mb-0">{{ article.title }}</h3>
-                                        <div>{{article.content}}</div>
+                                        <h3 class="mb-0"><p class="description">{{ article.title }}</p></h3>
+                                        <div><p class="description">{{article.content}}</p></div>
                                         <div>{{article.date}}</div>
                                     </div>
                                     </v-card-title>
@@ -57,8 +57,8 @@
 
                                         <v-card-title primary-title>
                                         <div>
-                                            <h3 class="headline mb-0">{{ magazine.name }}</h3>
-                                            <div>{{magazine.description}}</div>
+                                            <h3 class="mb-0"><p class="description">{{ magazine.name }}</p></h3>
+                                            <div><p class="description">{{magazine.description}}</p></div>
                                         </div>
                                         </v-card-title>
                                     </v-card>
@@ -119,3 +119,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+p.description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+</style>
