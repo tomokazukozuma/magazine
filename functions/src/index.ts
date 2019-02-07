@@ -54,3 +54,23 @@ exports.crawlArticleInfo = functions.https.onCall(async (data, context) => {
     });
     return result;
 });
+
+exports.addComment = functions.https.onCall(async (data, context) => {
+    const db = admin.firestore();
+    const userDoc = await db.collection('users').doc(context.auth.uid).get()
+                        .catch(error => {
+                            console.log(error);
+                            return error
+                        });;
+    await db.collection(`articles/${data.articleId}/comments`).doc(uuid()).set({
+        user: userDoc.data(),
+        comment: data.comment,
+        create_on: new Date()
+    })
+    .catch(error => {
+        console.log(error);
+        return error;
+    });
+    console.log('Success');
+    return;
+});
