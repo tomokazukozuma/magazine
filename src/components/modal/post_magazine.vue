@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 import firebaseClient from '../../firebase_client';
 import * as uuid from 'uuid/v4';
 
@@ -51,13 +50,6 @@ export default {
         }
     },
     methods: {
-        submit () {
-            const func = firebase.functions().httpsCallable('addMagazine');
-            func({name: this.name, description: this.description})
-            .then(() => {
-                this.dialog = false;
-            });
-        },
         addMagazine() {
             const db = firebaseClient.db();
             db.collection(`users/${this.$store.getters.user.uid}/magazines`).doc(uuid()).set({

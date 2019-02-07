@@ -48,21 +48,6 @@ exports.createArticle = functions.firestore.document("magazines/{magazineId}/art
     return;
 });
 
-exports.addMagazine = functions.https.onCall(async (data, context) => {
-    const db = admin.firestore();
-    await db.collection('magazines').doc(uuid()).set({
-        uid: context.auth.uid,
-        name: data.name,
-        description: data.description,
-        create_on: new Date()
-    })
-    .catch((err) => {
-        console.log(err); // eslint-disable-line no-console
-    });
-    console.log('Success'); // eslint-disable-line no-console
-    return;
-});
-
 exports.crawlArticleInfo = functions.https.onCall(async (data, context) => {
     const result = await parser(data.url, false).catch(error => {
         console.error(error);
