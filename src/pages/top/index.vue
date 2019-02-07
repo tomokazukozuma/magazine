@@ -26,6 +26,7 @@
                     <v-container grid-list-md>
                         <v-layout row wrap>
                             <v-flex xs6 v-for="(article, i) in articles" :key="i">
+                                <router-link v-bind:to="{ name : 'Article', params : { articleId: article.id }}">
                                 <v-card :href="article.url" target="_blank">
                                     <v-img
                                     :src="article.sumbnail"
@@ -40,6 +41,7 @@
                                     </div>
                                     </v-card-title>
                                 </v-card>
+                                </router-link>
                             </v-flex>
                         </v-layout>
                     </v-container>

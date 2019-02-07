@@ -33,7 +33,8 @@
         },
         mounted () {
             const db = firebaseClient.db();
-            db.collection("magazines").where("uid", "==", this.$route.params.uid)
+            db.collection("magazines")
+            .where("uid", "==", this.$route.params.uid)
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
