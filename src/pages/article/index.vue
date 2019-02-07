@@ -61,6 +61,7 @@
 <script>
 import firebase from 'firebase';
 import firebaseClient from '../../firebase_client';
+
 export default {
     data () {
         return {
@@ -85,19 +86,7 @@ export default {
             }
         });
 
-        db.collection(`articles/${this.$route.params.articleId}/comments`)
-        .get()
-        .then((querySnapshot) => {
-            querySnapshot.forEach(doc => {
-                let data = {
-                    id: doc.id,
-                    user: doc.data().user,
-                    comment: doc.data().comment,
-                    create_on: doc.data().create_on
-                }
-                this.comments.push(data);
-            });
-        });
+        this.getComment();
     },
     methods: {
         addComment() {
@@ -105,10 +94,28 @@ export default {
             func({articleId: this.$route.params.articleId, comment: this.comment})
             .then(() => {
                 this.clear();
+                this.getComment();
             });
         },
         clear () {
             this.comment = '';
+        },
+        getComment() {
+            this.comments = [];
+            const db = firebaseClient.db();
+            db.collection(`articles/${this.$route.params.articleId}/comments`)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach(doc => {
+                    let data = {
+                        id: doc.id,
+                        user: doc.data().user,
+                        comment: doc.data().comment,
+                        create_on: doc.data().create_on
+                    }
+                    this.comments.push(data);
+                });
+            });
         }
     }
 }
