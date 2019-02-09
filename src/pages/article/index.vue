@@ -19,6 +19,7 @@
                     </v-card>
                 </v-flex>
                 <v-flex xs12>
+                    <v-card>
                     <v-card-text>
                         <v-text-field
                         label="コメント"
@@ -30,6 +31,7 @@
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" flat @click="addComment">登録</v-btn>
                     </v-card-actions>
+                    </v-card>
                 </v-flex>
                 <v-flex xs12>
                     <v-card>
