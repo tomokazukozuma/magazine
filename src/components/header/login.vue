@@ -1,14 +1,13 @@
 <template>
     <v-toolbar-items>
-        <v-btn flat>
+        <v-btn flat  v-if="isSignIn">
             <PostArticle />
         </v-btn>
-        <v-btn flat>
+        <v-btn flat  v-if="isSignIn">
             <PostMagazine />
         </v-btn>
         <v-btn flat>
         <div v-if="isSignIn">
-            
             <v-menu offset-y>
                 <span slot="activator">
                     <v-avatar>
