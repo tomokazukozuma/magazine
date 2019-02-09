@@ -35,11 +35,13 @@ export default {
     },
     mounted() {
         const db = firebaseClient.db();
-        db.collection("articles").where("magazineId", "==", this.$route.params.magazineId)
+        db.collection("articles")
+        .where("magazineId", "==", this.$route.params.magazineId)
+        .orderBy("create_on", "desc")
         .get()
         .then((querySnapshot) => {
             const articles = []
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach(doc => {
                 let data = {
                     'id': doc.id,
                     'sumbnail': doc.data().image,

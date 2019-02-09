@@ -34,9 +34,7 @@
                 <v-flex xs12>
                     <v-card>
                         <v-list three-line>
-                        <template v-for="(item) in comments">
-
-
+                        <template v-for="(item, index) in comments">
                             <v-list-tile
                             :key="item.comment"
                             avatar
@@ -49,6 +47,10 @@
                                 <v-list-tile-title v-html="item.comment"></v-list-tile-title>
                             </v-list-tile-content>
                             </v-list-tile>
+                            <v-divider
+                            :inset="true"
+                            :key="index"
+                            ></v-divider>
                         </template>
                         </v-list>
                     </v-card>
@@ -104,6 +106,7 @@ export default {
             this.comments = [];
             const db = firebaseClient.db();
             db.collection(`articles/${this.$route.params.articleId}/comments`)
+            .orderBy("create_on", "desc")
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach(doc => {

@@ -21,36 +21,36 @@ exports.registerUsers = functions.auth.user().onCreate(async user => {
         email,
         create_on: new Date(),
     })
-    .catch((err) => {
-        console.log(err); // eslint-disable-line no-console
+    .catch(error => {
+        return error;
     });
-    console.log('Success'); // eslint-disable-line no-console
+    console.log('Success');
     return;
 });
 
 exports.createMagazine = functions.firestore.document("users/{uid}/magazines/{magazineId}").onCreate(async (snap, ctx) => {
     const db = admin.firestore();
     await db.collection('magazines').doc(ctx.params.magazineId).set(snap.data())
-    .catch((err) => {
-        console.log(err); // eslint-disable-line no-console
+    .catch(error => {
+        return error;
     });
-    console.log('Success'); // eslint-disable-line no-console
+    console.log('Success');
     return;
 });
 
 exports.createArticle = functions.firestore.document("magazines/{magazineId}/articles/{articleId}").onCreate(async (snap, ctx) => {
     const db = admin.firestore();
     await db.collection('articles').doc(ctx.params.articleId).set(snap.data())
-    .catch((err) => {
-        console.log(err); // eslint-disable-line no-console
+    .catch(error => {
+        return error;
     });
-    console.log('Success'); // eslint-disable-line no-console
+    console.log('Success');
     return;
 });
 
 exports.crawlArticleInfo = functions.https.onCall(async (data, context) => {
     const result = await parser(data.url, false).catch(error => {
-        console.error(error);
+        return error;
     });
     return result;
 });
@@ -59,7 +59,6 @@ exports.addComment = functions.https.onCall(async (data, context) => {
     const db = admin.firestore();
     const userDoc = await db.collection('users').doc(context.auth.uid).get()
                         .catch(error => {
-                            console.log(error);
                             return error
                         });;
     await db.collection(`articles/${data.articleId}/comments`).doc(uuid()).set({
@@ -68,7 +67,6 @@ exports.addComment = functions.https.onCall(async (data, context) => {
         create_on: new Date()
     })
     .catch(error => {
-        console.log(error);
         return error;
     });
     console.log('Success');
