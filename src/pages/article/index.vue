@@ -22,7 +22,7 @@
                     <v-card>
                     <v-card-text>
                         <v-text-field
-                        label="コメント"
+                        label="コメントを書く"
                         required
                         v-model="comment"
                         ></v-text-field>
@@ -33,7 +33,7 @@
                     </v-card-actions>
                     </v-card>
                 </v-flex>
-                <v-flex xs12>
+                <v-flex xs12 v-if="comments.length!=0">
                     <v-card>
                         <v-list three-line>
                         <template v-for="(item, index) in comments">
@@ -56,7 +56,7 @@
                         </template>
                         </v-list>
                     </v-card>
-                    </v-flex>
+                </v-flex>
             </v-layout>
         </v-container>
     </v-content>

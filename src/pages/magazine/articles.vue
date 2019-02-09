@@ -38,7 +38,6 @@ export default {
         db.collection(`magazines/${this.$route.params.magazineId}/articles`)
         .get()
         .then(querySnapshot => {
-            // const articles = []
             querySnapshot.forEach(doc => {
                 let data = {
                     'id': doc.id,
@@ -49,7 +48,6 @@ export default {
                 }
                 this.articles.push(data)
             });
-            // this.articles = articles;
         });
     }
 }
