@@ -1,28 +1,9 @@
 <template>
     <v-content>
-        <v-container grid-list-md text-xs-center>
-            <v-layout row wrap>
-                <v-flex xs4>
-                    <v-card dark color="primary">
-                    <v-card-text class="px-0">New</v-card-text>
-                    </v-card>
-                </v-flex>
-                <v-flex xs4>
-                    <v-card dark color="primary">
-                    <v-card-text class="px-0">Recommend</v-card-text>
-                    </v-card>
-                </v-flex>
-                <v-flex xs4>
-                    <v-card dark color="primary">
-                    <v-card-text class="px-0">Magazine</v-card-text>
-                    </v-card>
-                </v-flex>
-            </v-layout>
-        </v-container>
-
         <v-container justify-center grid-list-md>
             <v-layout>
                 <v-flex xs8>
+                    <v-layout justify-start subheading font-weight-black>最新記事</v-layout>
                     <v-container grid-list-md>
                         <v-layout row wrap>
                             <v-flex xs6 v-for="(article, i) in articles" :key="i">
@@ -35,7 +16,7 @@
 
                                     <v-card-title primary-title>
                                     <div>
-                                        <h3 class="mb-0"><p class="title">{{ article.title }}</p></h3>
+                                        <h3><p class="title">{{ article.title }}</p></h3>
                                         <div><p class="description">{{article.content}}</p></div>
                                         <v-layout row wrap>
                                             <v-flex xs6>
@@ -54,6 +35,7 @@
                     </v-container>
                 </v-flex>
                 <v-flex xs4>
+                    <v-layout justify-start subheading font-weight-black>ピックアップマガジン</v-layout>
                     <v-container grid-list-md>
                         <v-layout row wrap>
                             <v-flex xs12 v-for="(magazine, i) in magazines" :key="i">
