@@ -37,7 +37,14 @@
                                     <div>
                                         <h3 class="mb-0"><p class="title">{{ article.title }}</p></h3>
                                         <div><p class="description">{{article.content}}</p></div>
-                                        <div>{{article.date}}</div>
+                                        <v-layout row wrap>
+                                            <v-flex xs6>
+                                                <div>{{article.create_on}}</div>
+                                            </v-flex>
+                                            <v-flex xs6>
+                                                <div>{{article.pickCount}} Picks</div>
+                                            </v-flex>
+                                        </v-layout>
                                     </div>
                                     </v-card-title>
                                 </v-card>
@@ -77,6 +84,7 @@
 
 <script>
 import firebaseClient from '../../firebase_client'
+import moment from 'moment'
 export default {
     data () {
         return {
@@ -96,9 +104,10 @@ export default {
                     id: doc.id,
                     sumbnail: doc.data().image,
                     content: doc.data().description,
-                    create_on: doc.data().create_on,
+                    create_on: moment(doc.data().create_on.toDate()).locale('ja').fromNow(),
                     title: doc.data().title,
-                    url: doc.data().url
+                    url: doc.data().url,
+                    pickCount: doc.data().pickCount
                 }
                 articles.push(data)
             });

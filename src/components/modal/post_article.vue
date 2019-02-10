@@ -1,7 +1,7 @@
 <template>
     <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent max-width="600px">
-        <span slot="activator" color="black" dark>投稿</span>
+        <span slot="activator" color="black" dark>記事投稿</span>
         <v-card>
             <v-card-title>
                 <span class="headline">取得記事</span>
@@ -60,7 +60,6 @@
 <script>
 import firebase from 'firebase';
 import firebaseClient from '../../firebase_client';
-import * as uuid from 'uuid/v4';
 import crypto from'crypto';
 
 function md5hex(str) {

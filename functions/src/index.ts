@@ -40,8 +40,19 @@ exports.createMagazine = functions.firestore.document("users/{uid}/magazines/{ma
 
 exports.createArticle = functions.firestore.document("magazines/{magazineId}/articles/{articleId}").onCreate(async (snap, ctx) => {
     const db = admin.firestore();
-    let article = snap.data();
-    article.magazineId = ctx.params.magazineId;
+    const docSnap = await db.collection('articles').doc(ctx.params.articleId).get()
+    .catch(error => {
+        return error;
+    });
+    let article
+    if (docSnap.exists) {
+        article = docSnap.data();
+        article.pickCount++;
+    } else {
+        article = snap.data();
+        article.magazineId = ctx.params.magazineId;
+        article.pickCount = 1;
+    }
     await db.collection('articles').doc(ctx.params.articleId).set(article)
     .catch(error => {
         return error;
