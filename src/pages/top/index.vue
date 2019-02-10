@@ -35,7 +35,7 @@
 
                                     <v-card-title primary-title>
                                     <div>
-                                        <h3 class="mb-0"><p class="description">{{ article.title }}</p></h3>
+                                        <h3 class="mb-0"><p class="title">{{ article.title }}</p></h3>
                                         <div><p class="description">{{article.content}}</p></div>
                                         <div>{{article.date}}</div>
                                     </div>
@@ -87,6 +87,7 @@ export default {
     mounted() {
         const db = firebaseClient.db();
         db.collection("articles")
+        .orderBy("create_on", "desc")
         .get()
         .then((querySnapshot) => {
             const articles = []
@@ -123,6 +124,13 @@ export default {
 </script>
 
 <style scoped>
+p.title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
 p.description {
     display: -webkit-box;
     -webkit-box-orient: vertical;
