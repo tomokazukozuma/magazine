@@ -70,6 +70,7 @@ import moment from 'moment'
 export default {
     data () {
         return {
+            loading: true,
             articles: [],
             magazines: []
         }

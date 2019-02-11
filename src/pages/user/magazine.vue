@@ -12,8 +12,8 @@
 
                             <v-card-title primary-title>
                             <div>
-                                <h3 class="headline mb-0">{{ magazine.name }} ...</h3>
-                                <div>{{magazine.explain}} ...</div>
+                                <h3 class="mb-0">{{ magazine.name }}</h3>
+                                <div>{{magazine.description}}</div>
                             </div>
                             </v-card-title>
                         </v-card>
@@ -41,9 +41,10 @@
                         'id': doc.id,
                         'uid': doc.data().uid,
                         'name': doc.data().name,
-                        'explain': doc.data().explain,
+                        'description': doc.data().description,
                         'create_on': doc.data().create_on,
                     }
+                    console.log(data)
                     this.magazines.push(data)
                 });
             });

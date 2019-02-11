@@ -1,6 +1,6 @@
 <template>
     <v-layout row justify-center>
-    <v-dialog v-model="dialog" persistent max-width="600px">
+    <v-dialog v-model="dialog" max-width="600px">
         <span slot="activator" color="black" dark>マガジン登録</span>
         <v-card>
             <v-card-title>
@@ -34,6 +34,7 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
+    <Loading ref="childLoading"/>
   </v-layout>
 </template>
 
@@ -41,7 +42,12 @@
 import firebaseClient from '../../firebase_client';
 import * as uuid from 'uuid/v4';
 
+import loading from '../loading';
+
 export default {
+    components: {
+        Loading: loading
+    },
     data() {
         return {
             dialog: false,
@@ -51,6 +57,7 @@ export default {
     },
     methods: {
         addMagazine() {
+            this.$refs.childLoading.openDialog();
             const db = firebaseClient.db();
             db.collection(`users/${this.$store.getters.user.uid}/magazines`).doc(uuid()).set({
                 uid: this.$store.getters.user.uid,
@@ -59,10 +66,12 @@ export default {
                 create_on: new Date()
             })
             .then(() => {
+                this.$refs.childLoading.closeDialog();
                 this.dialog = false;
                 this.clear();
             })
             .catch(err => {
+                this.$refs.childLoading.closeDialog();
                 console.log(err)
             });
         },
