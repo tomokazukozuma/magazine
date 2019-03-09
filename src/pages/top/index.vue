@@ -7,29 +7,7 @@
                     <v-container grid-list-md>
                         <v-layout row wrap>
                             <v-flex xs6 v-for="(article, i) in articles" :key="i">
-                                <router-link v-bind:to="{ name : 'Article', params : { articleId: article.id }}">
-                                <v-card :href="article.url" target="_blank">
-                                    <v-img
-                                    :src="article.sumbnail"
-                                    aspect-ratio="2"
-                                    ></v-img>
-
-                                    <v-card-title primary-title>
-                                    <div>
-                                        <h3><p class="title">{{ article.title }}</p></h3>
-                                        <div><p class="description">{{article.content}}</p></div>
-                                        <v-layout row wrap>
-                                            <v-flex xs6>
-                                                <div>{{article.create_on}}</div>
-                                            </v-flex>
-                                            <v-flex xs6>
-                                                <div>{{article.pickCount}} Picks</div>
-                                            </v-flex>
-                                        </v-layout>
-                                    </div>
-                                    </v-card-title>
-                                </v-card>
-                                </router-link>
+                                <ArticleCard v-bind:article="article"/>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -39,21 +17,7 @@
                     <v-container grid-list-md>
                         <v-layout row wrap>
                             <v-flex xs12 v-for="(magazine, i) in magazines" :key="i">
-                                <router-link v-bind:to="{ name : 'MagazineArticles', params : { magazineId: magazine.id }}">
-                                    <v-card>
-                                        <v-img
-                                        :src="magazine.sumbnail"
-                                        aspect-ratio="1.75"
-                                        ></v-img>
-
-                                        <v-card-title primary-title>
-                                        <div>
-                                            <h3 class="mb-0"><p class="description">{{ magazine.name }}</p></h3>
-                                            <div><p class="description">{{magazine.description}}</p></div>
-                                        </div>
-                                        </v-card-title>
-                                    </v-card>
-                                </router-link>
+                                <MagazineCard v-bind:magazine="magazine"/>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -65,9 +29,15 @@
 </template>
 
 <script>
+import articleCard from '../../components/article_card'
+import magazineCard from '../../components/magazine_card'
 import firebaseClient from '../../firebase_client'
 import moment from 'moment'
 export default {
+    components: {
+        ArticleCard: articleCard,
+        MagazineCard: magazineCard
+    },
     data () {
         return {
             loading: true,
@@ -114,19 +84,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-p.title {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-}
-
-p.description {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-}
-</style>

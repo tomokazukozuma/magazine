@@ -3,22 +3,7 @@
         <v-container justify-center grid-list-md>
             <v-layout row wrap>
                 <v-flex xs12 sm6 md4 v-for="(article, i) in articles" :key="i">
-                    <router-link v-bind:to="{ name : 'Article', params : { articleId: article.id }}">
-                    <v-card :href="article.link" target="_blank">
-                        <v-img
-                        :src="article.sumbnail"
-                        aspect-ratio="1.75"
-                        ></v-img>
-
-                        <v-card-title primary-title>
-                        <div>
-                            <h3 class="mb-0"><p class="title">{{ article.title }}</p></h3>
-                            <div><p class="description">{{article.content}}</p></div>
-                            <div>{{article.date}}</div>
-                        </div>
-                        </v-card-title>
-                    </v-card>
-                    </router-link>
+                    <ArticleCard v-bind:article="article"/>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -26,8 +11,13 @@
 </template>
 
 <script>
+import articleCard from '../../components/article_card'
 import firebaseClient from '../../firebase_client'
+import moment from 'moment'
 export default {
+    components: {
+        ArticleCard: articleCard
+    },
     data () {
         return {
             articles: []
@@ -43,7 +33,7 @@ export default {
                     'id': doc.id,
                     'sumbnail': doc.data().image,
                     'content': doc.data().description,
-                    'create_on': doc.data().create_on,
+                    'create_on': moment(doc.data().create_on.toDate()).locale('ja').fromNow(),
                     'title': doc.data().title
                 }
                 this.articles.push(data)
