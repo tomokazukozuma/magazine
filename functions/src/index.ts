@@ -50,7 +50,6 @@ exports.createArticle = functions.firestore.document("magazines/{magazineId}/art
         article.pickCount++;
     } else {
         article = snap.data();
-        article.magazineId = ctx.params.magazineId;
         article.pickCount = 1;
     }
     await db.collection('articles').doc(ctx.params.articleId).set(article)

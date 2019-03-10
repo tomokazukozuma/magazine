@@ -12,10 +12,10 @@
                 <div><p class="description">{{article.content}}</p></div>
                 <v-layout row wrap>
                     <v-flex xs6>
-                        <div>{{article.create_on}}</div>
+                        <div>{{ article.create_on }}</div>
                     </v-flex>
                     <v-flex xs6>
-                        <div>{{article.pickCount}} Picks</div>
+                        <div>{{ article.pickCount }} Picks</div>
                     </v-flex>
                 </v-layout>
             </div>

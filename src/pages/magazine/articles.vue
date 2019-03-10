@@ -26,18 +26,23 @@ export default {
     mounted() {
         const db = firebaseClient.db();
         db.collection(`magazines/${this.$route.params.magazineId}/articles`)
+        .orderBy("create_on", "desc")
         .get()
         .then(querySnapshot => {
+            const articles = []
             querySnapshot.forEach(doc => {
                 let data = {
-                    'id': doc.id,
-                    'sumbnail': doc.data().image,
-                    'content': doc.data().description,
-                    'create_on': moment(doc.data().create_on.toDate()).locale('ja').fromNow(),
-                    'title': doc.data().title
+                    id: doc.id,
+                    sumbnail: doc.data().image,
+                    content: doc.data().description,
+                    create_on: moment(doc.data().create_on.toDate()).locale('ja').fromNow(),
+                    title: doc.data().title,
+                    url: doc.data().url,
+                    pickCount: doc.data().pickCount
                 }
-                this.articles.push(data)
+                articles.push(data)
             });
+            this.articles = articles;
         });
     }
 }
